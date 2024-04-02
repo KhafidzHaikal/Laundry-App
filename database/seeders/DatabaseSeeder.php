@@ -20,16 +20,16 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'id' => 1,
-            'name' => 'Haikal',
+            'name' => 'Admin',
             'email' => 'admin@gmail.com',
-            'no_telp' => '081293058325',
+            'no_telp' => '0781293128',
             'type' => 0,
             'password' => bcrypt('123')
         ]);
 
         User::create([
             'id' => 2,
-            'name' => 'Khopadz',
+            'name' => 'User',
             'email' => 'user@gmail.com',
             'no_telp' => '081293058298',
             'type' => 1,
