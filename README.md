@@ -1,12 +1,12 @@
 
 Selamat Pagi.
-Saya Muhamad Khafidz Haikal izin mengirimkan hasil pengerjaan Test Fronend Developer. 
+Saya Muhamad Khafidz Haikal izin mengirimkan hasil pengerjaan Test Frontend Developer. 
 
 Aplikasi : Sistem Jasa Laundry
 Link Repo : https://github.com/KhafidzHaikal/laundry-app.git
 Framework : Laravel Inertia React
 Database : MySql
-User : Admin dan Peminjam
+User : Admin dan User
 
 Use Case 
 1. Admin: login, Menerima Pesanan, CRUD Laundry
