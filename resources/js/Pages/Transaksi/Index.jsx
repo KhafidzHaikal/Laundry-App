@@ -66,6 +66,11 @@ const PageTransaksi = ({ auth, transaksi }) => {
                                     <div className='flex justify-between'>
                                         <h2>Nomor Transaksi : <strong className='underline'>{item.no_transaksi}</strong></h2>
                                         <h2>Status :
+                                            {item.status === 'menunggu konfirmasi' &&
+                                                <DangerBadge>
+                                                    {item.status}
+                                                </DangerBadge>
+                                            }
                                             {item.status === 'diproses' &&
                                                 <WarningBadge>
                                                     {item.status}

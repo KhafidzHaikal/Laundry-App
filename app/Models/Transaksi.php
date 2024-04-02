@@ -24,7 +24,7 @@ class Transaksi extends Model
     protected function status(): Attribute
     {
         return new Attribute(
-            get: fn ($value) => ["diproses", "selesai"][$value],
+            get: fn ($value) => ["menunggu konfirmasi", "diproses", "selesai"][$value],
         );
     }
 }

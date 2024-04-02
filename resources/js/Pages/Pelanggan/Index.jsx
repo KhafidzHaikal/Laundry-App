@@ -50,10 +50,15 @@ const PagePelanggan = ({ auth, transaksi }) => {
                                         <tr key={item.id}>
                                             <td>{index + 1}</td>
                                             <td>
-                                                {item.status === 'diproses' &&
+                                                {item.status === 'menunggu konfirmasi' &&
                                                     <DangerBadge>
                                                         {item.status}
                                                     </DangerBadge>
+                                                }
+                                                {item.status === 'diproses' &&
+                                                    <WarningBadge>
+                                                        {item.status}
+                                                    </WarningBadge>
                                                 }
                                                 {item.status === 'selesai' &&
                                                     <SuccessBadge>
@@ -66,7 +71,7 @@ const PagePelanggan = ({ auth, transaksi }) => {
                                             <td>{item.laundry_nama}</td>
                                             <td>{item.total_harga}</td>
                                             <td>
-                                                {item.status === 'diproses' &&
+                                                {item.status === 'menunggu konfirmasi' &&
                                                     <form onSubmit={(e) => {
                                                         update(e, item.id);
                                                     }}>
@@ -74,6 +79,16 @@ const PagePelanggan = ({ auth, transaksi }) => {
                                                         <DangerButton>
                                                             Kerjakan
                                                         </DangerButton>
+                                                    </form>
+                                                }
+                                                {item.status === 'diproses' &&
+                                                    <form onSubmit={(e) => {
+                                                        update(e, item.id);
+                                                    }}>
+                                                        <input type="hidden" value={data.status = 2} name="status" onChange={() => setData('status', 1)} />
+                                                        <WarningButton>
+                                                            Proses
+                                                        </WarningButton>
                                                     </form>
                                                 }
                                                 {item.status === 'selesai' &&
