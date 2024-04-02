@@ -66,7 +66,10 @@ class LaundryController extends Controller
      */
     public function edit(Laundry $laundry)
     {
-        //
+        return Inertia::render('Laundry/Edit', [
+            'laundry' => $laundry,
+            'kategoris' => Kategori::all()
+        ]);
     }
 
     /**
@@ -74,7 +77,20 @@ class LaundryController extends Controller
      */
     public function update(Request $request, Laundry $laundry)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'kategori_id' => 'required',
+            'harga' => 'required',
+            'waktu_selesai' => 'required',
+        ]);
+        
+        $laundry->update([
+            'nama' => $request->nama,
+            'harga' => $request->harga,
+            'waktu_selesai' => $request->waktu_selesai,
+            'kategori_id' => $request->kategori_id,
+        ]);
+        return redirect()->route('laundry.index');
     }
 
     /**
@@ -82,6 +98,9 @@ class LaundryController extends Controller
      */
     public function destroy(Laundry $laundry)
     {
-        //
+        $laundry = Laundry::findOrFail($laundry->id);
+        $laundry->delete();
+        
+        return redirect()->back();
     }
 }

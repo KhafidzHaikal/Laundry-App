@@ -1,7 +1,7 @@
 import PrimaryButton from '@/Components/Button/PrimaryButton'
 import SecondaryButton from '@/Components/Button/SecondaryButton'
 import Authenticated from '@/Layouts/AuthenticatedLayout'
-import { Head, Link, useForm } from '@inertiajs/react'
+import { Head, Link, router, useForm } from '@inertiajs/react'
 import React, { useState } from 'react'
 import Modal from '@/Components/Form/Modal'
 import InputLabel from '@/Components/Form/InputLabel'
@@ -11,9 +11,14 @@ import DangerButton from '@/Components/Button/DangerButton'
 
 const PageLaundry = ({ auth, laundries, kategori }) => {
     const [showModal, setShowModal] = useState(false);
-    const { data, setData, post } = useForm({
+    const { data, setData, post, get } = useForm({
         nama: ''
     });
+
+    const update = (e, id) => {
+        e.preventDefault();
+        get(route('laundry.edit', { id: id }))
+    }
 
     const submit = (e) => {
         e.preventDefault();
@@ -28,6 +33,21 @@ const PageLaundry = ({ auth, laundries, kategori }) => {
     const closeModal = () => {
         setShowModal(false);
     };
+
+    const handleDelete = async (e, id) => {
+        e.preventDefault();
+        if (confirm('Are you sure you want to delete this Data?')) {
+            router.delete(route('laundry.destroy', id));
+        }
+    }
+
+    const handleDeleteKategori = async (e, id) => {
+        e.preventDefault();
+        if (confirm('Are you sure you want to delete this Data?')) {
+            router.delete(route('kategori.destroy', id));
+        }
+    }
+
     return (
         <Authenticated
             user={auth.user}
@@ -83,6 +103,7 @@ const PageLaundry = ({ auth, laundries, kategori }) => {
                                     <tr>
                                         <th>No</th>
                                         <th>Nama</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -90,6 +111,13 @@ const PageLaundry = ({ auth, laundries, kategori }) => {
                                         <tr key={item.id}>
                                             <td width={50}>{index + 1}</td>
                                             <td>{item.nama}</td>
+                                            <td>
+                                                <DangerButton
+                                                    onClick={(e) => { handleDeleteKategori(e, item.id) }}
+                                                >
+                                                    Delete
+                                                </DangerButton>
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -124,14 +152,16 @@ const PageLaundry = ({ auth, laundries, kategori }) => {
                                             <td>{item.harga}</td>
                                             <td>{item.waktu_selesai}</td>
                                             <td className='flex gap-2'>
-                                                <WarningButton>
+                                                <WarningButton
+                                                    onClick={(e) => { update(e, item.id) }}
+                                                >
                                                     Edit
                                                 </WarningButton>
-                                                <form action="">
-                                                    <DangerButton>
-                                                        Delete
-                                                    </DangerButton>
-                                                </form>
+                                                <DangerButton
+                                                    onClick={(e) => { handleDelete(e, item.id) }}
+                                                >
+                                                    Delete
+                                                </DangerButton>
                                             </td>
                                         </tr>
                                     ))}

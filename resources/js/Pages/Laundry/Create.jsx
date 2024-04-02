@@ -4,35 +4,34 @@ import PrimaryButton from '@/Components/Button/PrimaryButton'
 import TextInput from '@/Components/Form/TextInput'
 import Authenticated from '@/Layouts/AuthenticatedLayout'
 import { Head, useForm } from '@inertiajs/react'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 const PageLaundryCreate = ({ auth, kategoris }) => {
     
     const { data, setData, post, errors } = useForm({
         nama: '',
+        kategori_id: '',
         harga: '',
         waktu_selesai: '',
     })
 
     const submit = (e) => {
         e.preventDefault();
-        // console.log(data);
-
         post(route('laundry.store'))
     }
 
     return (
         <Authenticated
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Tambah Laundry</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Tambah Paket Laundry</h2>}
         >
-            <Head title="Tambah Kategori Laundry" />
+            <Head title="Tambah Paket Laundry" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                            <h1>Tabel Kategori Laundry</h1>
+                            <h1>Form Paket Laundry</h1>
                             <form onSubmit={submit} className='mt-7'>
                                 <div className='w-full'>
                                     <div className='mt-5'>
